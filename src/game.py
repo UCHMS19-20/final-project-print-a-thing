@@ -1,7 +1,11 @@
-import time
+import sys
+import pygame
 
-print("Welcome to the sample repository!")
-time.sleep(1)
-print("All the code for your game should go in the src folder")
-time.sleep(1)
-print("Now delete this file and make your own!")
+pygame.init()
+
+screen = pygame.display.set_mode((400, 400))
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
