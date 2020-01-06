@@ -3,12 +3,12 @@ import pygame
 
 pygame.init()
 
-display_height = 400
-display_width = 400
+display_height = 600
+display_width = 800
 
 black = (0, 0, 0)
 white = (255, 255, 255)
-greeen = (100, 200, 0)
+bloo = (50, 50, 150)
 
 screen = pygame.display.set_mode((display_width, display_height))
 
@@ -18,14 +18,19 @@ def charpl(x, y):
     screen.blit(char, (x,y))
 
 xp =  (display_width * 0.45)
-yp = (display_height * 0.6)
+yp = (display_height * 0.35)
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-    screen.fill(greeen)
-
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                xp -= 8
+            if event.key == pygame.K_RIGHT:
+                xp += 8
+    screen.fill(bloo)            
+    
     charpl(xp, yp)
 
     pygame.display.flip()
