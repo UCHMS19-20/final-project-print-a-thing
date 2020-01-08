@@ -12,7 +12,7 @@ bloo = (50, 50, 150)
 
 screen = pygame.display.set_mode((display_width, display_height))
 
-char = pygame.image.load("src/AAAH.jpg")
+char = pygame.image.load("src/mouse.jpg")
 
 def charpl(x, y):
     screen.blit(char, (x,y))
