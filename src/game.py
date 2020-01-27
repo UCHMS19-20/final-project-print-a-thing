@@ -1,7 +1,6 @@
 Import sys
 Import pygame
 
-Win = False
 Screen_width = 800
 Screen_height = 800
 
@@ -9,14 +8,14 @@ White = (255, 255, 255)
 Black = (0, 0, 0)
 Grade = 5
 
-Class Player (pygame.sprite.Sprite):
+class Player (pygame.sprite.Sprite):
 	def __init__(self, x, y):
         super().__init__()
-		self.image = (character image(mouse))
+		self.image = ("img/mouse.jpg")
 		self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.platforms = false
+        self.platforms = False
 
         self.change_y = 0
         self.change_x = 0
@@ -72,18 +71,18 @@ Class Player (pygame.sprite.Sprite):
     def Stop(self):
         self.change.x = 0
 
-Class Platform(pygame.sprite.Sprite):
+class Platform(pygame.sprite.Sprite):
     def __init__(self, wide, tall):
         super().__init__()
         self.image = pygame.Surface([wide, tall])
         self.image.fill(white)
         self.rect = self.image.get_rect
 
-Class layout(object):
+class layout(object):
     def __init__(self, player):
 		self.platform_list = pygame.sprite.Group
 		self.player = player
-		self.background = (Bkg image)
+		self.background = ("img/background.jpg")
 
     level = [[210, 70, 500, 500],
         [210, 70, 200, 400],
@@ -104,10 +103,10 @@ Class layout(object):
 		self.background.draw(screen)
 		self.platform_list.draw(screen)
 
-Class finalpaper(pygame.sprite.Sprite):
+class finalpaper(pygame.sprite.Sprite):
 	def __init__(self, x, y):
         super().__init__()
-		self.image = (paper image)
+		self.image = ("img/paper.jpg")
 		self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
