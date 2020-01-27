@@ -1,102 +1,210 @@
-import sys
-import pygame
+Import sys
+Import pygame
 
-#http://programarcadegames.com/python_examples/show_file.php?file=platform_jumper.py
+Win = False
+Screen_width = 800
+Screen_height = 800
 
-pygame.init()
+White = (255, 255, 255)
+Black = (0, 0, 0)
+Grade = 5
 
-Fail = False
-
-display_height = 600
-display_width = 800
-
-black = (0, 0, 0)
-white = (255, 255, 255)
-bloo = (50, 50, 150)
-
-screen = pygame.display.set_mode((display_width, display_height))
-
-class Player(Pygame.sprite.Sprite):
-
-    def __init__(self):
+Class Player (pygame.sprite.Sprite):
+	def __init__(self, x, y):
         super().__init__()
+		self.image = (character image(mouse))
+		self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.platforms = false
 
-        self.image = pygame.image.load("src/mouse.jpg")
-        self.rect = self.image.get_rect()
-
-        self.change_x = 0
         self.change_y = 0
+        self.change_x = 0
 
+    def changespeed(self, y):
+        self.changey += y
+
+    def update(self):
+        self.rect.x += self.change_x
+        self.rect.y += self.change_y
         self.level = None
     
-    def update(self):
-        self.calc_grav()
+        Hit_list = pygame.sprite.spritecollide(self, self.level.platforms, False)
+            for P in Hit_list:
+                if self.change_x > 0:
+                    self.rect.right = P.rect.left
+                if self.change_x < 0:
+                    self.rect.left = P.rect.right
+            for P in Hit_list:
+                if self.change_y > 0:
+                    self.rect.bottom = P.rect.top
+                if self.change_y < 0:
+                    self.rect.top = P.rect.bottom
+                    self.change_y = 0
 
-        self.rect.x += self.change_x
-
-        block_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
-        for block in block_hit_list:
-            if self.change_x > 0:
-                self.rect.right = block.rect.left
-             if self.change_x < 0:
-                self.rect.left = block.rect.right
-        
-        block_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
-        for block in block_hit_list:
-            if self.change_y > 0:
-                self.rect.bottom = block.rect.top
-             if self.change_y < 0:
-                self.rect.top = block.rect.bottom
-
-            self.change_y = 0
-
-    def calc_grav(self):
-        if self.change_y == 0:
-            self.change_y = 1
+    def fall(self):
+        if self.change.y == 0:
+            self.change.y = .5
         else:
-            self.change_y = .35
-        if self.rect.y >= display_height - self.rect.height and self.change_y >= 0:
-            Fail = True
+            self.change.y += .5
 
-    def jump(self):
-        self.change_y = -10
-    def left(self):
-        self.change_x = -6
-    def right(self):
-        self.change_x = 6
-    def stop(self):
-        self.change_x = 0
+        if self.rect.y >= screen_height - self.rect.height and self.change_y >= 0:
+            Grade -= 1
+            self.change.y = 0
+            self.change.x =0
+            self.rect.x = x
+ 			self.rect.y = y
 
-class Platform(pygame.sprite.Sprite):
+    def ymove(self):
+        self.rect.y += 2
+        Hit_list = pygame.sprite.spritecollide(self, self.platforms, False)
+ 		self.rect.y -= 2
 
-    def __init__(self, width, height, color):
+        if Len Hit_list > 0:
+ 			self.change.y = - 8
+
+    def Rmove(self):
+        self.change.x = 6
+
+    def Lmove(self):
+        self.change.x = -6
+
+    def Stop(self):
+        self.change.x = 0
+
+Class Platform(pygame.sprite.Sprite):
+    def __init__(self, wide, tall):
         super().__init__()
-        self.image = pygame.Surface([width. height)])
-        self.image.fill(color)
-        self.rect = self.image.get_rect()
+        self.image = pygame.Surface([wide, tall])
+        self.image.fill(white)
+        self.rect = self.image.get_rect
 
-class Level(object):
+Class layout(object):
     def __init__(self, player):
+		self.platform_list = pygame.sprite.Group
+		self.player = player
+		self.background = (Bkg image)
 
-class enemy(pygame.sprite.Sprite):
+    level = [[210, 70, 500, 500],
+        [210, 70, 200, 400],
+        [210, 70, 600, 300],
+        ]
+
+    for platform in level:
+  			P = Platform(platform[0], platform[1])
+			P.rect.x = platform[2]
+			P.rect.y = platform[3]
+			P.player = self.player
+			self.platform_list.add(p)
+
+	def update(self):
+		self.platform_list.update
+
+	def draw(self, screen):
+		self.background.draw(screen)
+		self.platform_list.draw(screen)
+
+Class finalpaper(pygame.sprite.Sprite):
+	def __init__(self, x, y):
+        super().__init__()
+		self.image = (paper image)
+		self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+def maingame():
+	pygame.init()
+	pygame.font.init()
+	screen_size = [Screen_width, Screen_height]
+	Screen = pygame.display.set_mode(screen_size)
+	Player = Player()
+	Paper = finalpaper()
+	
+	Grademessage = "Sample"
+
+	if Grade == 5:
+		Grademessage = "If turned in now you will get an A"
+    elif Grade == 4:
+		Grademessage = "If turned in now you will get a B"
+    elif Grade == 3:
+        Grademessage = "If turned in now you will get a C"
+    elif Grade == 2:
+		Grademessage = "If turned in now you will get a D"
+    elif Grade == 1:
+		Grademessage = "If turned in now you will get an F"
+    else:
+		Grademessage = "You couldn’t turn it in and got a 0"
+
+	Font = pygame.font.Font("timesnewroman.ttf", 12)
+	Text = Font.render(Grademessage, True, Black, White)
+	Textrect = text.get_rect
+	Textrect.center = (Screen_width/2, Screen_height/3)
+
+    Sprites_list = pygame.sprite.Group()
+    Player.level = Layout()
+
+    Player.rect.x = 340
+    Player.rect.y = 100
+    Paper.rect.x = 240
+    Paper.rect.y = 100
+
+    Sprites_list.add(Player)
+    Sprites_list.add(Paper)
+
+    Won = False
+
+    while not Won:
+	    for event in pygame.event.get():
+		    if event.type == pygame.QUIT:
+			    sys.exit
+
+		    if event.type == pygame.KEY_DOWN:
+			    if event.key == pygame.K_Left
+				    Player.Lmove()
+                if event.key == pygame.K_Right
+				    Player.Rmove()
+                if event.key == pygame.K_Up
+				    Player.ymove()
+
+           		if event.type == pygame.KEYUP:
+                	if event.key == pygame.K_LEFT and player.change_x < 0:
+                    		Player.stop()
+                	if event.key == pygame.K_RIGHT and player.change_x > 0:
+                    		Player.stop()
+
+	    if Player.rect.colliderect(Paper.rect):
+		    Won = True
+
+	    if Grade == 0:
+		    Won = True
+		
+	    Sprites_list.update()
+	    Layout.update()
+	    Screen.blit(Text, Textrect)
+
+	    if player.rect.x > Screen_width:
+		    Player.rect.right = Screen_width
+	    if player.rect.x < 0:
+		    Player.rect.left = 0
+
+	    Layout.draw(Screen)
+	    Sprites_list.draw(Screen)
+	
+        clock.tick(60)
+	    pygame.display.flip
+
+    if Grade > 5
+	    Screen.fill(white)
+	    Text = Font.render("You won! You handed the paper in on time!", True, black, white)
+		Textrect = text.get_rect
+		Textrect.center = (screen_width/2, screen_height/3)
+
+	else:
+		Screen.fill(white)
+	    Text = Font.render("You lost. You couldn’t get the paper to print. You shouldn’t have waited until the last day huh", True, black, white)
+		Textrect = text.get_rect
+		Textrect.center = (screen_width/2, screen_height/3)
+
+maingame()
 
 
-xp =  (display_width * 0.45)
-yp = (display_height * 0.35)
-
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                yp 
-            if event.key == pygame.K_LEFT:
-                xp -= 8
-            if event.key == pygame.K_RIGHT:
-                xp += 8
-    screen.fill(bloo)            
-    
-    charpl(xp, yp)
-
-    pygame.display.flip()
