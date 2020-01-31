@@ -339,7 +339,7 @@ def main():
                 sys.exit()
         screen.fill(WHITE)
         pic = pygame.image.load("src/img/Success.jpg")
-        screen.blit(pic, (0, 50))
+        screen.blit(pic, (0, 0))
         pygame.display.flip()
  
 #Play the game
