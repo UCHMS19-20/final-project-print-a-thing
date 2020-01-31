@@ -271,7 +271,7 @@ def main():
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                done = True
+                sys.exit
  
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
